@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta name="viewport" content="width=600">
+	<meta charset="UTF-8">
+	<title>にじさんじ新聞</title>
+	<script src="./js/uikit.min.js"></script>
+	<link rel="stylesheet" href="./css/uikit.min.css">
+	<link rel="stylesheet" href="./css/text.css">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP|Sawarabi+Mincho&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="app">
+
+<div id="target">
+	<div class="uk-container" style="max-width:1000px;background:#fcfcfc;padding:1em 1.5em;border:1px solid #ebebeb;">
+		<div class="uk-text-right">{{date}}</div>
+		<div class="uk-grid-collapse">
+			<div class="uk-align-center uk-text-center uk-text-middle uk-padding-small" style="background-color:#c9d3d6;">
+				<div style="border:1px solid rgb(255,255,255,0.5); padding:0.5em;">
+				<a href="#header-1" uk-toggle style="display:block;">
+				<span class="uk-heading-medium gf-sawarabi" style="color:#fff;">{{header1}}新聞</span>
+				</a>
+				</div>
+			</div>
+		</div>
+		<article class="uk-article" >
+			<a href="#header-2" uk-toggle style="display:block;">
+				<h1 class="uk-text-bold uk-article-title">{{header2}}&nbsp;</h1>
+			</a>
+			<a href="#header-3" uk-toggle style="display:block;">
+				<p class="uk-article-meta">{{header3}}&nbsp;</p>
+			</a>
+		</article>
+		<div class="uk-grid-small uk-child-width-1-2 uk-text-center" uk-grid>
+			<div style="width:60%;">
+			<a href="#image-1" uk-toggle style="display:block;">
+				<div style="min-height:30vh;background-color:#fff;border:1px solid #ebebeb;">
+					<img v-show="uploadedImage" :src="uploadedImage"　width="100%" />
+				</div>
+			</a>
+			</div>
+			<div style="width:40%;">
+				<div class="uk-padding　uk-text-justify uk-text-left">
+					<a href="#header-4" uk-toggle style="display:block;">
+						<h3 style="color:#fff;background:#b5b5b5;padding:0.3em;">{{header4}}&nbsp;</h3>
+					</a>
+					<a href="#body-1" class="uk-link-text" uk-toggle style="display:block;">
+					{{body1}}&nbsp;
+					</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="uk-child-width-1-2" uk-grid>
+			<div style="width:65%">
+				<a href="#header-5" uk-toggle style="display:block;">
+					<h2>{{header5}}&nbsp;</h2>
+				</a>
+				<div class="uk-column-1-2 uk-column-divider" style="column-gap:2em;">
+				<a href="#body-2" class="uk-link-text" uk-toggle style="display:block;">
+					<p class="uk-text-left">
+						{{body2}}&nbsp;
+					</p>
+				</a>
+				
+				</div>
+			</div>
+			<div style="width:35%;margin-top:1em;">
+				<a href="#image-2" uk-toggle style="display:block;">
+				<div style="min-height:20vh;background-color:#fff;border:1px solid #ebebeb;">
+					<img v-show="uploadedImage2" :src="uploadedImage2"　width="100%" />
+				</div>
+				</a>
+			</div>
+		</div>
+		<a href="#header-6" uk-toggle style="display:block;margin-top:1em;">
+			<h3 style="color:#fff;background:#b5b5b5;padding:0.3em;">{{header6}}&nbsp;</h3>
+		</a>
+		<div class="uk-child-width-1-2" uk-grid>
+			<div style="width:35%;">
+				<a href="#image-3" uk-toggle style="display:block;">
+				<div style="min-height:20vh;background-color:#fff;border:1px solid #ebebeb;">
+					<img v-show="uploadedImage3" :src="uploadedImage3"　width="100%" />
+				</div>
+				</a>
+			</div>
+			<div style="width:65%;">
+				<div class="uk-column-1-2 uk-column-divider" style="column-gap:2em;">
+					<a href="#body-3" class="uk-link-text" uk-toggle style="display:block;">
+						<p class="uk-text-left">
+							{{body3}}&nbsp;
+						</p>
+					</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="uk-text-center uk-text-middle uk-padding-small" style="border:1px solid #c9d3d6;">&copy;にじさんじ新聞【非公式】</div>
+	</div>
+</div>
+
+<div id="image-1" class="modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">画像を選択してください</h5>
+		<input type="file" v-on:change="onFileChange">
+	</div>
+</div>
+
+<div id="image-2" class="modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">画像を選択してください</h5>
+		<input type="file" v-on:change="onFileChange2">
+	</div>
+</div>
+
+<div id="image-3" class="modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">画像を選択してください</h5>
+		<input type="file" v-on:change="onFileChange3">
+	</div>
+</div>
+
+<div id="header-1" class="modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">タイトルを入力</h5>
+		<input class="uk-input" type="text"　v-model="header1" placeholder="タイトルを入力してください">
+	</div>
+</div>
+
+<div id="header-2" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">大見出しを入力</h5>
+		<input class="uk-input" type="text"　v-model="header2" placeholder="大見出しを入力してください">
+    </div>
+</div>
+
+<div id="header-3" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">大見出し下文章を入力</h5>
+		<input class="uk-input" type="text"　v-model="header3" placeholder="文章入力してください">
+    </div>
+</div>
+
+<div id="header-4" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">小見出しを入力</h5>
+		<input class="uk-input" type="text"　v-model="header4" placeholder="小見出し入力してください">
+    </div>
+</div>
+
+<div id="header-5" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">中見出しを入力</h5>
+		<input class="uk-input" type="text"　v-model="header5" placeholder="中見出し入力してください">
+    </div>
+</div>
+
+<div id="header-6" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">小見出しを入力</h5>
+		<input class="uk-input" type="text"　v-model="header6" placeholder="小見出し入力してください">
+    </div>
+</div>
+
+<div id="body-1" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body1" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
+<div id="body-2" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body2" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
+<div id="body-3" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body3" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
+<div class="uk-card uk-card-primary uk-padding-small" style="position:fixed;bottom:1em;right:1em;width:80px;height:80px;border-radius:80px;"　v-on:click="generate">
+<img src="./img/download.png">
+</div>
+
+<a id="getImage" href=""  style="display:none;"  download="image.png">画像保存</a>
+<div id="result">
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-alpha.12/dist/html2canvas.min.js"></script>
+
+<script>
+//ロードされた際の処理として実施：
+window.onload = function(){
+	//HTML内に画像を表示
+	/*
+	html2canvas(document.querySelector("#target")).then(canvas => {
+		document.querySelector("#result").appendChild(canvas)
+	});
+	*/
+}
+new Vue({
+  el: '#app',
+  data:{
+	date: getToday(),
+	header1: 'にじさんじ',
+	header2: '大見出し',
+	header3: '大見出し下文章（発行者名とか）',
+	header4: '小見出し',
+	header5: '中見出し',
+	header6: '小見出し',
+	body1: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	body2: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	body3: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	uploadedImage: '',
+	uploadedImage2: '',
+	uploadedImage3: ''
+  },
+  methods: {
+	onFileChange(e) {
+	  let files = e.target.files || e.dataTransfer.files;
+	  this.createImage(files[0]);
+	},
+	createImage(file) {
+	  let reader = new FileReader();
+	  reader.onload = (e) => {
+		this.uploadedImage = e.target.result;
+	  };
+	  reader.readAsDataURL(file);
+	},
+	onFileChange2(e) {
+	  let files = e.target.files || e.dataTransfer.files;
+	  this.createImage2(files[0]);
+	},
+	createImage2(file) {
+	  let reader = new FileReader();
+	  reader.onload = (e) => {
+		this.uploadedImage2 = e.target.result;
+	  };
+	  reader.readAsDataURL(file);
+	},
+	onFileChange3(e) {
+	  let files = e.target.files || e.dataTransfer.files;
+	  this.createImage3(files[0]);
+	},
+	createImage3(file) {
+	  let reader = new FileReader();
+	  reader.onload = (e) => {
+		this.uploadedImage3 = e.target.result;
+	  };
+	  reader.readAsDataURL(file);
+	},
+	generate(){
+		html2canvas(document.querySelector("#target")).then(function(canvas){
+			downloadImage(canvas.toDataURL());
+			/*
+			var result = document.querySelector("#result");
+			result.innerHTML = '';
+			result.appendChild(canvas)
+			*/
+		});
+	}
+  },
+})
+
+function downloadImage (data) {
+	let fname ="nijisanji.png";
+	let encdata= atob(data.replace(/^.*,/, ''));
+	let outdata = new Uint8Array(encdata.length);
+	for (var i = 0; i < encdata.length; i++) {
+	outdata[i] = encdata.charCodeAt(i);
+	}
+	let blob = new Blob([outdata], ["image/png"]);
+
+	if (window.navigator.msSaveBlob) {
+	//IE用
+	window.navigator.msSaveOrOpenBlob(blob, fname);
+	} else {
+	//それ以外？
+	document.getElementById("getImage").href=data;
+	document.getElementById("getImage").download=fname;
+	document.getElementById("getImage").click();
+	}
+}
+
+function getToday() {
+	let now = new Date();
+	let year = now.getFullYear();
+	let mon = now.getMonth()+1;
+	let day = now.getDate();
+	let you = now.getDay();
+	let youbi = new Array("日","月","火","水","木","金","土");
+	let s = year + "年" + mon + "月" + day + "日 (" + youbi[you] + ")";
+	return s;
+}
+</script>
+
+</body>
+
+</html>

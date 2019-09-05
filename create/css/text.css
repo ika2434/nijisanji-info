@@ -1,0 +1,23 @@
+.vertical-rl {
+	-webkit-writing-mode: vertical-rl;
+	-ms-writing-mode: tb-rl;
+	writing-mode: vertical-rl;
+}
+
+.gf-sawarabi {
+	font-family: 'Sawarabi Mincho', sans-serif;
+}
+
+.gf-noto {
+	font-family: 'Noto Serif JP', serif;
+}
+
+html {
+	padding-top:1em;
+	padding-bottom:1em;
+}
+
+html,.uk-text-bold,h1,h2,h3,h4 {
+	font-family: 'Sawarabi Mincho', sans-serif;
+	/*font-family: 'Noto Serif JP', serif; */
+}
