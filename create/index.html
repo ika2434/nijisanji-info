@@ -7,7 +7,7 @@
 	<script src="./js/uikit.min.js"></script>
 	<link rel="stylesheet" href="./css/uikit.min.css">
 	<link rel="stylesheet" href="./css/text.css">
-	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP|Sawarabi+Mincho&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP|Sawarabi+Mincho+Kosugi+Maru&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 		<div class="uk-grid-collapse">
 			<div class="uk-align-center uk-text-center uk-text-middle uk-padding-small" style="background-color:#c9d3d6;">
 				<div style="border:1px solid rgb(255,255,255,0.5); padding:0.5em;">
-				<a href="#header-1" uk-toggle style="display:block;">
+				<a href="#header-1" uk-toggle style="display:block;padding-bottom:1em;">
 				<span class="uk-heading-medium gf-sawarabi" style="color:#fff;">{{header1}}新聞</span>
 				</a>
 				</div>
@@ -45,7 +45,7 @@
 			<div style="width:40%;">
 				<div class="uk-padding　uk-text-justify uk-text-left">
 					<a href="#header-4" uk-toggle style="display:block;">
-						<h3 style="color:#fff;background:#b5b5b5;padding:0.3em;">{{header4}}&nbsp;</h3>
+						<h3 style="color:#fff;background:#b5b5b5;padding:0.3em;padding-bottom:0.5em;">{{header4}}&nbsp;</h3>
 					</a>
 					<a href="#body-1" class="uk-link-text" uk-toggle style="display:block;">
 					{{body1}}&nbsp;
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 		<a href="#header-6" uk-toggle style="display:block;margin-top:1em;">
-			<h3 style="color:#fff;background:#b5b5b5;padding:0.3em;">{{header6}}&nbsp;</h3>
+			<h3 style="color:#fff;background:#b5b5b5;padding:0.3em;padding-bottom:0.5em;">{{header6}}&nbsp;</h3>
 		</a>
 		<div class="uk-child-width-1-2" uk-grid>
 			<div style="width:35%;">
@@ -199,12 +199,24 @@
 </div>
 
 <div class="uk-card uk-card-primary uk-padding-small" style="position:fixed;bottom:1em;right:1em;width:80px;height:80px;border-radius:80px;"　v-on:click="generate">
+<a href="#my-download" style="display:block;" uk-toggle>
 <img src="./img/download.png">
+</a>
 </div>
 
-<a id="getImage" href=""  style="display:none;"  download="image.png">画像保存</a>
-<div id="result">
+<div id="my-download" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-large uk-text-center gf-kosu">
+	<button class="uk-modal-close-default" type="button" uk-close></button>
+		<img src="./img/nijisanji-info.png" width="20%"><br>
+		発行完了！<br>
+		「#にじさんじ新聞」でツイートしましょう！<br>
+		<p class="uk-text-small">
+			<a href="https://twitter.com" target="_blank"><img src="./img/twitter.png" width="30px"> Twitterを開く</a>
+		</p>
+	</div>
 </div>
+
+<a id="getImage" href=""  style="display:none;"  download="nijisanji.png">画像保存</a>
 
 </div>
 
@@ -213,15 +225,6 @@
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-alpha.12/dist/html2canvas.min.js"></script>
 
 <script>
-//ロードされた際の処理として実施：
-window.onload = function(){
-	//HTML内に画像を表示
-	/*
-	html2canvas(document.querySelector("#target")).then(canvas => {
-		document.querySelector("#result").appendChild(canvas)
-	});
-	*/
-}
 new Vue({
   el: '#app',
   data:{
@@ -276,11 +279,6 @@ new Vue({
 	generate(){
 		html2canvas(document.querySelector("#target")).then(function(canvas){
 			downloadImage(canvas.toDataURL());
-			/*
-			var result = document.querySelector("#result");
-			result.innerHTML = '';
-			result.appendChild(canvas)
-			*/
 		});
 	}
   },
@@ -294,15 +292,11 @@ function downloadImage (data) {
 	outdata[i] = encdata.charCodeAt(i);
 	}
 	let blob = new Blob([outdata], ["image/png"]);
-
 	if (window.navigator.msSaveBlob) {
-	//IE用
-	window.navigator.msSaveOrOpenBlob(blob, fname);
+		window.navigator.msSaveOrOpenBlob(blob, fname);
 	} else {
-	//それ以外？
-	document.getElementById("getImage").href=data;
-	document.getElementById("getImage").download=fname;
-	document.getElementById("getImage").click();
+		document.getElementById("getImage").href=data;
+		document.getElementById("getImage").click();
 	}
 }
 
