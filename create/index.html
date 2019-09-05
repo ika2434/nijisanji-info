@@ -33,7 +33,7 @@
 	<div class="uk-container" style="max-width:1000px;background:#fcfcfc;padding:1em 1.5em;border:1px solid #ebebeb;">
 		<div class="uk-text-right">{{date}}</div>
 		<div class="uk-grid-collapse">
-			<div class="uk-align-center uk-text-center uk-text-middle uk-padding-small" style="background-color:#c9d3d6;">
+			<div class="uk-align-center uk-text-center uk-text-middle uk-padding-small" style="background-color:#757575;">
 				<div style="border:1px solid rgb(255,255,255,0.5); padding:0.5em;">
 				<a href="#header-1" uk-toggle style="display:block;padding-bottom:1em;">
 				<span class="uk-heading-medium gf-sawarabi" style="color:#fff;">{{header1}}新聞</span>
@@ -80,6 +80,11 @@
 						{{body2}}&nbsp;
 					</p>
 				</a>
+				<a href="#body-3" class="uk-link-text" uk-toggle style="display:block;">
+					<p class="uk-text-left">
+						{{body3}}&nbsp;
+					</p>
+				</a>
 				
 				</div>
 			</div>
@@ -104,9 +109,14 @@
 			</div>
 			<div style="width:65%;">
 				<div class="uk-column-1-2 uk-column-divider" style="column-gap:2em;">
-					<a href="#body-3" class="uk-link-text" uk-toggle style="display:block;">
+					<a href="#body-4" class="uk-link-text" uk-toggle style="display:block;">
 						<p class="uk-text-left">
-							{{body3}}&nbsp;
+							{{body4}}&nbsp;
+						</p>
+					</a>
+					<a href="#body-5" class="uk-link-text" uk-toggle style="display:block;">
+						<p class="uk-text-left">
+							{{body5}}&nbsp;
 						</p>
 					</a>
 				</div>
@@ -213,6 +223,22 @@
     </div>
 </div>
 
+<div id="body-4" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body4" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
+<div id="body-5" class="modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body5" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
 <div class="uk-card uk-card-primary uk-padding-small" style="position:fixed;bottom:1em;right:1em;width:80px;height:80px;border-radius:80px;"　v-on:click="generate">
 <a href="#my-download" style="display:block;" uk-toggle>
 <img src="./img/download.png">
@@ -235,7 +261,7 @@
 	</div>
 </div>
 
-<a id="getImage" href=""  style="display:none;"  download="nijisanji.png">画像保存</a>
+<a id="getImage" href=""  style="display:none;"  download="にじさんじ新聞.png">画像保存</a>
 
 </div>
 
@@ -257,9 +283,11 @@ new Vue({
 	body1: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
 	body2: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
 	body3: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	body4: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	body5: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
 	uploadedImage: '',
 	uploadedImage2: '',
-	uploadedImage3: ''
+	uploadedImage3: '',
   },
   methods: {
 	onFileChange(e) {
@@ -304,7 +332,7 @@ new Vue({
 })
 
 function downloadImage (data) {
-	let fname ="nijisanji.png";
+	let fname = "にじさんじ新聞.png";
 	let encdata= atob(data.replace(/^.*,/, ''));
 	let outdata = new Uint8Array(encdata.length);
 	for (var i = 0; i < encdata.length; i++) {
