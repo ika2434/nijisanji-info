@@ -249,11 +249,14 @@
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-large uk-text-center gf-kosu">
 	<button class="uk-modal-close-default" type="button" uk-close></button>
 		<img src="./img/nijisanji-info.png" width="20%"><br>
-		ダウンロード完了！<br>
-		「#にじさんじ新聞」でツイートしてね！<br>
+		発行完了！<br>
+		画像をダウンロードして「#にじさんじ新聞」でツイートしてね！<br>
 		<p class="uk-text-small">
 			<a href="https://twitter.com" target="_blank"><img src="./img/twitter.png" width="30px"> Twitterを開く</a>
 		</p>
+		
+		<img src="./img/load.gif" id="result"　download="にじさんじ新聞.png" />
+		
 		<br>
 		<p class="uk-text-small">
 			不具合報告は<a href="https://twitter.com/benio02325740" target="_blank">いか@くコ:彡</a>までお願いします
@@ -288,6 +291,7 @@ new Vue({
 	uploadedImage: '',
 	uploadedImage2: '',
 	uploadedImage3: '',
+	imagename: getToday() + "_にじさんじ新聞.png"
   },
   methods: {
 	onFileChange(e) {
@@ -325,7 +329,9 @@ new Vue({
 	},
 	generate(){
 		html2canvas(document.querySelector("#target")).then(function(canvas){
-			downloadImage(canvas.toDataURL());
+			let imgData = canvas.toDataURL()
+			document.getElementById('result').src = imgData
+			//downloadImage(canvas.toDataURL());
 		});
 	}
   },
