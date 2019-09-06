@@ -30,10 +30,10 @@
 <div id="app">
 
 <div id="target">
-	<div class="uk-container" style="max-width:1000px;background:#fcfcfc;padding:1em 1.5em;border:1px solid #ebebeb;">
+	<div class="uk-container" style="max-width:1000px;padding:1em 1.5em;border:1px solid #ebebeb;"　:style="bodystyle">
 		<div class="uk-text-right">{{date}}</div>
 		<div class="uk-grid-collapse">
-			<div class="uk-align-center uk-text-center uk-text-middle uk-padding-small" style="background-color:#757575;">
+			<div class="uk-align-center uk-text-center uk-text-middle uk-padding-small" :style="headerstyle">
 				<div style="border:1px solid rgb(255,255,255,0.5); padding:0.5em;">
 				<a href="#header-1" uk-toggle style="display:block;padding-bottom:1em;">
 				<span class="uk-heading-medium gf-sawarabi" style="color:#fff;">{{header1}}新聞</span>
@@ -60,7 +60,7 @@
 			<div style="width:40%;">
 				<div class="uk-padding　uk-text-justify uk-text-left">
 					<a href="#header-4" uk-toggle style="display:block;">
-						<h3 style="color:#fff;background:#b5b5b5;padding:0.3em;padding-bottom:0.5em;">{{header4}}&nbsp;</h3>
+						<h3 style="color:#fff;padding:0.3em;padding-bottom:0.5em;" :style="headerstyle">{{header4}}&nbsp;</h3>
 					</a>
 					<a href="#body-1" class="uk-link-text" uk-toggle style="display:block;">
 					{{body1}}&nbsp;
@@ -97,7 +97,7 @@
 			</div>
 		</div>
 		<a href="#header-6" uk-toggle style="display:block;margin-top:1em;">
-			<h3 style="color:#fff;background:#b5b5b5;padding:0.3em;padding-bottom:0.5em;">{{header6}}&nbsp;</h3>
+			<h3 style="color:#fff;padding:0.3em;padding-bottom:0.5em;" :style="headerstyle">{{header6}}&nbsp;</h3>
 		</a>
 		<div class="uk-child-width-1-2" uk-grid>
 			<div style="width:35%;">
@@ -127,122 +127,150 @@
 	</div>
 </div>
 
-<div id="image-1" class="modal-close-default" uk-modal>
-	<div class="uk-modal-dialog uk-modal-body">
+<div id="image-1" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
 		<h5 class="uk-modal-title">画像を選択してください</h5>
 		<input type="file" v-on:change="onFileChange">
 	</div>
 </div>
 
-<div id="image-2" class="modal-close-default" uk-modal>
-	<div class="uk-modal-dialog uk-modal-body">
+<div id="image-2" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
 		<h5 class="uk-modal-title">画像を選択してください</h5>
 		<input type="file" v-on:change="onFileChange2">
 	</div>
 </div>
 
-<div id="image-3" class="modal-close-default" uk-modal>
-	<div class="uk-modal-dialog uk-modal-body">
+<div id="image-3" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
 		<h5 class="uk-modal-title">画像を選択してください</h5>
 		<input type="file" v-on:change="onFileChange3">
 	</div>
 </div>
 
-<div id="header-1" class="modal-close-default" uk-modal>
-	<div class="uk-modal-dialog uk-modal-body">
+<div id="header-1" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
 		<h5 class="uk-modal-title">タイトルを入力</h5>
 		<input class="uk-input" type="text"　v-model="header1" placeholder="タイトルを入力してください">
 	</div>
 </div>
 
-<div id="header-2" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="header-2" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">大見出しを入力</h5>
 		<input class="uk-input" type="text"　v-model="header2" placeholder="大見出しを入力してください">
     </div>
 </div>
 
-<div id="header-3" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="header-3" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">大見出し下文章を入力</h5>
 		<input class="uk-input" type="text"　v-model="header3" placeholder="文章入力してください">
     </div>
 </div>
 
-<div id="header-4" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="header-4" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">小見出しを入力</h5>
 		<input class="uk-input" type="text"　v-model="header4" placeholder="小見出し入力してください">
     </div>
 </div>
 
-<div id="header-5" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="header-5" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">中見出しを入力</h5>
 		<input class="uk-input" type="text"　v-model="header5" placeholder="中見出し入力してください">
     </div>
 </div>
 
-<div id="header-6" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="header-6" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">小見出しを入力</h5>
 		<input class="uk-input" type="text"　v-model="header6" placeholder="小見出し入力してください">
     </div>
 </div>
 
-<div id="body-1" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="body-1" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">文章を入力</h5>
 		<textarea class="uk-textarea"　v-model="body1" placeholder="文章入力してください" rows="4"></textarea>
     </div>
 </div>
 
-<div id="body-2" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="body-2" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">文章を入力</h5>
 		<textarea class="uk-textarea"　v-model="body2" placeholder="文章入力してください" rows="4"></textarea>
     </div>
 </div>
 
-<div id="body-3" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="body-3" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">文章を入力</h5>
 		<textarea class="uk-textarea"　v-model="body3" placeholder="文章入力してください" rows="4"></textarea>
     </div>
 </div>
 
-<div id="body-4" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="body-4" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">文章を入力</h5>
 		<textarea class="uk-textarea"　v-model="body4" placeholder="文章入力してください" rows="4"></textarea>
     </div>
 </div>
 
-<div id="body-5" class="modal-close-default" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
+<div id="body-5" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
         <h5 class="uk-modal-title">文章を入力</h5>
 		<textarea class="uk-textarea"　v-model="body5" placeholder="文章入力してください" rows="4"></textarea>
     </div>
 </div>
 
-<div class="uk-card uk-card-primary uk-padding-small" style="position:fixed;bottom:1em;right:1em;width:80px;height:80px;border-radius:80px;"　v-on:click="generate">
-<a href="#my-download" style="display:block;" uk-toggle>
-<img src="./img/download.png">
+<div style="position:fixed;bottom:1em;right:1em;">
+
+<a href="#my-palette" style="display:block;" uk-toggle>
+<div class="uk-card uk-padding-small" style="background:#f2025a;margin-bottom:1em;width:80px;height:80px;border-radius:80px;">
+	<img src="./img/palette.png">
+</div>
 </a>
+
+<a href="#my-download" style="display:block;" uk-toggle>
+	<div class="uk-card uk-card-primary uk-padding-small" style="width:80px;height:80px;border-radius:80px;"　v-on:click="generate">
+		<img src="./img/download.png">
+	</div>
+</a>
+
+</div>
+
+<div id="my-palette" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical gf-kosu">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">色を選択</h5>
+		<p class="uk-text-center">
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(0)" style="color:#fff;background:#757575">デフォルト</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(1)" style="color:#fff;background:#c93838">赤系</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(2)" style="color:#fff;background:#ffb54d">オレンジ系</button>
+		</p>
+		<p class="uk-text-center">
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(3)" style="color:#fff;background:#ebd028">黄色系</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(4)" style="color:#fff;background:#60bf4d">緑系</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(5)" style="color:#fff;background:#3a80c9">青系</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(6)" style="color:#fff;background:#c57fc7">紫系</button>
+		</p>
+	</div>
 </div>
 
 <div id="my-download" class="uk-flex-top" uk-modal>
@@ -291,9 +319,25 @@ new Vue({
 	uploadedImage: '',
 	uploadedImage2: '',
 	uploadedImage3: '',
-	imagename: getToday() + "_にじさんじ新聞.png"
+	imagename: getToday() + "_にじさんじ新聞.png",
+	headerstyle: {
+		'background-color':'#757575'
+	},
+	bodystyle: {
+		'background-color':'#fcfcfc'
+	}
   },
   methods: {
+	onColorChange(e) {
+		let hcolor = ['#757575','#c93838','#ffb54d','#ebd028','#60bf4d','#3a80c9','#c57fc7'];
+		let bcolor = ['#fcfcfc','#fff5f5','#fff7eb','#fffceb','#f4fff2','#f7fbff','#fffaff'];
+		this.headerstyle = {
+			'background-color':hcolor[e]
+		}
+		this.bodystyle = {
+			'background-color':bcolor[e]
+		}
+	},
 	onFileChange(e) {
 	  let files = e.target.files || e.dataTransfer.files;
 	  this.createImage(files[0]);
