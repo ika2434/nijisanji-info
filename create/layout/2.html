@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta name="viewport" content="width=600">
+	<meta charset="UTF-8">
+	<title>にじさんじ新聞</title>
+	<script src="../js/uikit.min.js"></script>
+	<link rel="stylesheet" href="../css/uikit.min.css">
+	<link rel="stylesheet" href="../css/text.css">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP|Sawarabi+Mincho|Kosugi+Maru&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="uk-text-center uk-padding-small uk-text-middle">
+<a href="https://nijisanji.info" target="_self">
+	<img src="../img/nijisanji-info.png" style="width:100px">
+	<span class="gf-kosu uk-text-large">
+	にじさんじ新聞ジェネレーター
+	</span>
+</a>
+	<p class="gf-kosu">
+	文字や画像の部分をクリックして好きな文章・画像に差し替えてね<br>
+	入力した文字はリアルタイムで反映されるよ！<br>
+	完成したら右下のダウンロードボタンからにじさんじ新聞の画像をダウンロード！<br>
+	#にじさんじ新聞　をつけてツイートしよう！
+	</p>
+</header>
+
+<div id="app">
+
+<div id="target">
+	<div class="uk-container" style="max-width:1000px;padding:1em 1.5em;border:1px solid #ebebeb;"　:style="bodystyle">
+		<div class="uk-text-right">{{date}}</div>
+		<div class="uk-grid-collapse">
+			<div class="uk-align-center uk-text-center uk-text-middle uk-padding-small" :style="headerstyle">
+				<div style="border:1px solid rgb(255,255,255,0.5); padding:0.5em;">
+				<a href="#header-1" uk-toggle style="display:block;padding-bottom:1em;">
+				<span class="uk-heading-medium gf-sawarabi" style="color:#fff;">{{header1}}新聞</span>
+				</a>
+				</div>
+			</div>
+		</div>
+		<article class="uk-article" >
+			<a href="#header-2" uk-toggle style="display:block;">
+				<h1 class="uk-text-bold uk-article-title">{{header2}}&nbsp;</h1>
+			</a>
+			<a href="#header-3" uk-toggle style="display:block;">
+				<p class="uk-article-meta">{{header3}}&nbsp;</p>
+			</a>
+		</article>
+		<div class="uk-grid-small uk-child-width-1 uk-text-center" uk-grid>
+			<div style="width:100%;">
+			<a href="#image-1" uk-toggle style="display:block;">
+				<div style="min-height:30vh;background-color:#fff;border:1px solid #ebebeb;">
+					<img v-show="uploadedImage" :src="uploadedImage"　width="100%" />
+				</div>
+			</a>
+			</div>
+		</div>
+		<hr>
+		<div class="uk-child-width-1-3" uk-grid>
+			<div style="width:35%;">
+				<a href="#image-2" uk-toggle style="display:block;">
+				<div style="min-height:20vh;background-color:#fff;border:1px solid #ebebeb;">
+					<img v-show="uploadedImage2" :src="uploadedImage2"　width="100%" />
+				</div>
+				</a>
+			</div>
+			<div style="width:30%">
+				<div class="uk-column-1" style="column-gap:2em;">
+				<a href="#body-2" class="uk-link-text uk-text-bold" uk-toggle style="display:block;">
+					<p class="uk-text-left">
+						{{body2}}&nbsp;
+					</p>
+				</a>
+				</div>
+			</div>
+			<div style="width:35%;">
+				<a href="#image-3" uk-toggle style="display:block;">
+				<div style="min-height:20vh;background-color:#fff;border:1px solid #ebebeb;">
+					<img v-show="uploadedImage3" :src="uploadedImage3"　width="100%" />
+				</div>
+				</a>
+			</div>
+		</div>
+		<a href="#header-6" uk-toggle style="display:block;margin-top:1em;">
+			<h3 style="color:#fff;padding:0.3em;padding-bottom:0.5em;" :style="headerstyle">{{header6}}&nbsp;</h3>
+		</a>
+		<div class="uk-child-width-1-2" uk-grid>
+			<div style="width:35%;">
+				<a href="#image-3" uk-toggle style="display:block;">
+				<div style="min-height:20vh;background-color:#fff;border:1px solid #ebebeb;">
+					<img v-show="uploadedImage3" :src="uploadedImage3"　width="100%" />
+				</div>
+				</a>
+			</div>
+			<div style="width:65%;">
+				<div class="uk-column-1-2 uk-column-divider" style="column-gap:2em;">
+					<a href="#body-4" class="uk-link-text" uk-toggle style="display:block;">
+						<p class="uk-text-left">
+							{{body4}}&nbsp;
+						</p>
+					</a>
+					<a href="#body-5" class="uk-link-text" uk-toggle style="display:block;">
+						<p class="uk-text-left">
+							{{body5}}&nbsp;
+						</p>
+					</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="uk-text-center uk-text-middle uk-padding-small" style="border:1px solid #c9d3d6;">&copy;にじさんじ新聞【非公式】</div>
+	</div>
+</div>
+
+<div id="image-1" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">画像を選択してください</h5>
+		<input type="file" v-on:change="onFileChange">
+	</div>
+</div>
+
+<div id="image-2" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">画像を選択してください</h5>
+		<input type="file" v-on:change="onFileChange2">
+	</div>
+</div>
+
+<div id="image-3" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">画像を選択してください</h5>
+		<input type="file" v-on:change="onFileChange3">
+	</div>
+</div>
+
+<div id="image-4" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">画像を選択してください</h5>
+		<input type="file" v-on:change="onFileChange4">
+	</div>
+</div>
+
+<div id="header-1" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">タイトルを入力</h5>
+		<input class="uk-input" type="text"　v-model="header1" placeholder="タイトルを入力してください">
+	</div>
+</div>
+
+<div id="header-2" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">大見出しを入力</h5>
+		<input class="uk-input" type="text"　v-model="header2" placeholder="大見出しを入力してください">
+    </div>
+</div>
+
+<div id="header-3" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">大見出し下文章を入力</h5>
+		<input class="uk-input" type="text"　v-model="header3" placeholder="文章入力してください">
+    </div>
+</div>
+
+<div id="header-4" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">小見出しを入力</h5>
+		<input class="uk-input" type="text"　v-model="header4" placeholder="小見出し入力してください">
+    </div>
+</div>
+
+<div id="header-5" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">中見出しを入力</h5>
+		<input class="uk-input" type="text"　v-model="header5" placeholder="中見出し入力してください">
+    </div>
+</div>
+
+<div id="header-6" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">小見出しを入力</h5>
+		<input class="uk-input" type="text"　v-model="header6" placeholder="小見出し入力してください">
+    </div>
+</div>
+
+<div id="body-1" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body1" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
+<div id="body-2" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body2" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
+<div id="body-3" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body3" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
+<div id="body-4" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body4" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
+<div id="body-5" class="uk-flex-top modal-close-default" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">文章を入力</h5>
+		<textarea class="uk-textarea"　v-model="body5" placeholder="文章入力してください" rows="4"></textarea>
+    </div>
+</div>
+
+<div style="position:fixed;bottom:1em;right:1em;">
+
+<a href="#my-palette" style="display:block;" uk-toggle>
+<div class="uk-card uk-padding-small" style="background:#f2025a;margin-bottom:1em;width:80px;height:80px;border-radius:80px;">
+	<img src="../img/palette.png">
+</div>
+</a>
+
+<a href="#my-download" style="display:block;" uk-toggle>
+	<div class="uk-card uk-card-primary uk-padding-small" style="width:80px;height:80px;border-radius:80px;"　v-on:click="generate">
+		<img src="../img/download.png">
+	</div>
+</a>
+
+</div>
+
+<div id="my-palette" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical gf-kosu">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+        <h5 class="uk-modal-title">色を選択</h5>
+		<p class="uk-text-center">
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(0)" style="color:#fff;background:#757575">デフォルト</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(1)" style="color:#fff;background:#c93838">赤系</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(2)" style="color:#fff;background:#ffb54d">オレンジ系</button>
+		</p>
+		<p class="uk-text-center">
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(3)" style="color:#fff;background:#ebd028">黄色系</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(4)" style="color:#fff;background:#60bf4d">緑系</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(5)" style="color:#fff;background:#3a80c9">青系</button>
+			<button class="uk-button uk-button-default" v-on:click="onColorChange(6)" style="color:#fff;background:#c57fc7">紫系</button>
+		</p>
+	</div>
+</div>
+
+<div id="my-download" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-large uk-text-center gf-kosu">
+	<button class="uk-modal-close-default" type="button" uk-close></button>
+		<img src="./img/nijisanji-info.png" width="20%"><br>
+		発行完了！<br>
+		画像をダウンロードして「#にじさんじ新聞」でツイートしてね！<br>
+		<p class="uk-text-small">
+			<a href="https://twitter.com" target="_blank"><img src="../img/twitter.png" width="30px"> Twitterを開く</a>
+		</p>
+		
+		<img src="../img/load.gif" id="result"　download="にじさんじ新聞.png" />
+		
+		<br>
+		<p class="uk-text-small">
+			不具合報告は<a href="https://twitter.com/benio02325740" target="_blank">いか@くコ:彡</a>までお願いします
+		</p>
+	</div>
+</div>
+
+<a id="getImage" href=""  style="display:none;"  download="にじさんじ新聞.png">画像保存</a>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-alpha.12/dist/html2canvas.min.js"></script>
+
+<script>
+new Vue({
+  el: '#app',
+  data:{
+	date: getToday(),
+	header1: 'にじさんじ',
+	header2: '大見出し',
+	header3: '大見出し下文章（発行者名とか）',
+	header4: '小見出し',
+	header5: '中見出し',
+	header6: '小見出し',
+	body1: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	body2: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	body3: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	body4: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	body5: 'サンプルテキストです。サンプルテキストです。サンプルテキストです。',
+	uploadedImage: '',
+	uploadedImage2: '',
+	uploadedImage3: '',
+	uploadedImage4: '',
+	imagename: getToday() + "_にじさんじ新聞.png",
+	headerstyle: {
+		'background-color':'#757575'
+	},
+	bodystyle: {
+		'background-color':'#fcfcfc'
+	}
+  },
+  methods: {
+	onColorChange(e) {
+		let hcolor = ['#757575','#c93838','#ffb54d','#ebd028','#60bf4d','#3a80c9','#c57fc7'];
+		let bcolor = ['#fcfcfc','#fff5f5','#fff7eb','#fffceb','#f4fff2','#f7fbff','#fffaff'];
+		this.headerstyle = {
+			'background-color':hcolor[e]
+		}
+		this.bodystyle = {
+			'background-color':bcolor[e]
+		}
+	},
+	onFileChange(e) {
+	  let files = e.target.files || e.dataTransfer.files;
+	  this.createImage(files[0]);
+	},
+	createImage(file) {
+	  let reader = new FileReader();
+	  reader.onload = (e) => {
+		this.uploadedImage = e.target.result;
+	  };
+	  reader.readAsDataURL(file);
+	},
+	onFileChange2(e) {
+	  let files = e.target.files || e.dataTransfer.files;
+	  this.createImage2(files[0]);
+	},
+	createImage2(file) {
+	  let reader = new FileReader();
+	  reader.onload = (e) => {
+		this.uploadedImage2 = e.target.result;
+	  };
+	  reader.readAsDataURL(file);
+	},
+	onFileChange3(e) {
+	  let files = e.target.files || e.dataTransfer.files;
+	  this.createImage3(files[0]);
+	},
+	createImage3(file) {
+	  let reader = new FileReader();
+	  reader.onload = (e) => {
+		this.uploadedImage3 = e.target.result;
+	  };
+	  reader.readAsDataURL(file);
+	},
+	onFileChange4(e) {
+	  let files = e.target.files || e.dataTransfer.files;
+	  this.createImage4(files[0]);
+	},
+	createImage4(file) {
+	  let reader = new FileReader();
+	  reader.onload = (e) => {
+		this.uploadedImage4 = e.target.result;
+	  };
+	  reader.readAsDataURL(file);
+	},
+	generate(){
+		html2canvas(document.querySelector("#target")).then(function(canvas){
+			let imgData = canvas.toDataURL()
+			document.getElementById('result').src = imgData
+			//downloadImage(canvas.toDataURL());
+		});
+	}
+  },
+})
+
+function downloadImage (data) {
+	let fname = "にじさんじ新聞.png";
+	let encdata= atob(data.replace(/^.*,/, ''));
+	let outdata = new Uint8Array(encdata.length);
+	for (var i = 0; i < encdata.length; i++) {
+	outdata[i] = encdata.charCodeAt(i);
+	}
+	let blob = new Blob([outdata], ["image/png"]);
+	if (window.navigator.msSaveBlob) {
+		window.navigator.msSaveOrOpenBlob(blob, fname);
+	} else {
+		document.getElementById("getImage").href=data;
+		document.getElementById("getImage").click();
+	}
+}
+
+function getToday() {
+	let now = new Date();
+	let year = now.getFullYear();
+	let mon = now.getMonth()+1;
+	let day = now.getDate();
+	let you = now.getDay();
+	let youbi = new Array("日","月","火","水","木","金","土");
+	let s = year + "年" + mon + "月" + day + "日 (" + youbi[you] + ")";
+	return s;
+}
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-146890188-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-146890188-1');
+</script>
+
+
+</body>
+
+</html>

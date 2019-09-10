@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<title>フリップ作成ツール</title>
+<script type="text/javascript" src="./js/uikit.min.js"></script>
+
+<link rel="stylesheet" href="./css/uikit.min.css">
+<link rel="stylesheet" href="./css/text.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP|Sawarabi+Mincho|Kosugi+Maru&display=swap" rel="stylesheet">
+<style>
+
+	html,body{
+		padding:0;
+		margin:0;
+		height:100%;
+	}
+	
+	.bk-color {
+		background-color:#4c568a;
+	}
+	
+	.font-size-20 {
+		font-size:20px;
+	}
+	
+	.font-size-28 {
+		font-size:28px;
+	}
+	
+	.font-size-32 {
+		font-size:32px;
+	}
+	
+	.font-size-38 {
+		font-size:38px;
+	}
+	
+	.font-color {
+		color:#595f92;
+	}
+	
+	#app {
+		
+	}
+	
+	.browser-size {
+		width:100%;
+		height:100%;
+	}
+	
+	.capture-size {
+		width:1280px;
+		height:720px;
+	}
+	
+	.stripe {
+		background-color: #fff;
+		/*
+		background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #ffcce8), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, #ffcce8), color-stop(0.75, #ffcce8), color-stop(0.75, transparent), to(transparent));
+		-webkit-background-size: 24px 24px;
+		*/
+		padding: 3px;
+		border-width:6px;
+		border-style:solid;
+		border-color: #ffcce8;
+		border-radius: 16px;
+		width: 1140px;
+		min-height:620px;
+		max-height:620px;
+	}
+	
+	.stripe-inner {
+		background: #fff;
+		padding: 20px;
+		margin: 6px;
+		border-radius: 16px;
+		max-width: 1140px;
+		min-height:566px;
+		max-height:566px;
+		border: 1px solid #fff;
+	}
+
+
+</style>
+<body>
+
+<div id="app" class="bk-color uk-flex uk-flex-center uk-flex-middle capture-size">
+<div id="target" class="bk-color uk-flex uk-flex-center uk-flex-middle capture-size">
+
+	<div class="stripe gf-noto font-size-28">
+		<div class="stripe-inner">
+			<div style="padding:1em 0.5em;">
+				<p class="uk-text-left" style="white-space:pre-wrap; word-wrap:break-word;">
+					<a href="#message-1" class="font-color" uk-toggle>{{message}}</a>
+				</p>
+				<p class="uk-text-right">
+					<a href="#user-1" class="font-color font-size-32" uk-toggle>{{user}}</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+<div id="message-1" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">お便りを入力</h5>
+		<textarea class="uk-textarea"　v-model="message" placeholder="お便りを入力してください" rows="6"></textarea>
+	</div>
+</div>
+
+<div id="user-1" class="uk-flex-top modal-close-default" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h5 class="uk-modal-title">お名前を入力</h5>
+		<input class="uk-input" type="text"　v-model="user" placeholder="お名前を入力してください">
+	</div>
+</div>
+
+	<div style="position:fixed;bottom:1em;right:1em;">
+		
+		<!--
+		<a href="#border-color" style="display:block;" uk-toggle uk-tooltip="背景色を変更">
+		<div class="uk-card uk-padding-small" style="background:#ff3d77;margin-bottom:1em;width:80px;height:80px;border-radius:80px;">
+			<img src="./img/back-color.png">
+		</div>
+		</a>
+		
+		<a href="#border-color" style="display:block;" uk-toggle uk-tooltip="枠色を変更">
+		<div class="uk-card uk-padding-small" style="background:#ffc23d;margin-bottom:1em;width:80px;height:80px;border-radius:80px;">
+			<img src="./img/border-color.png">
+		</div>
+		</a>
+		-->
+		
+		<a href="#my-download" style="display:block;" uk-toggle　uk-tooltip="画像ダウンロード">
+			<div class="uk-card uk-card-primary uk-padding-small" style="width:80px;height:80px;border-radius:80px;"　v-on:click="generate">
+				<img src="./img/download.png">
+			</div>
+		</a>
+		
+		<!--
+		<div id="border-color" class="uk-flex-top modal-close-default" uk-modal>
+			<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical gf-kosu">
+				<button class="uk-modal-close-default" type="button" uk-close></button>
+				<h5 class="uk-modal-title">枠色を選択</h5>
+				<p class="uk-text-center">
+					<button class="uk-button uk-button-default" v-on:click="onColorChange(0)" style="color:#fff;background:#757575">デフォルト</button>
+					<button class="uk-button uk-button-default" v-on:click="onColorChange(1)" style="color:#fff;background:#c93838">赤系</button>
+					<button class="uk-button uk-button-default" v-on:click="onColorChange(2)" style="color:#fff;background:#ffb54d">オレンジ系</button>
+				</p>
+				<p class="uk-text-center">
+					<button class="uk-button uk-button-default" v-on:click="onColorChange(3)" style="color:#fff;background:#ebd028">黄色系</button>
+					<button class="uk-button uk-button-default" v-on:click="onColorChange(4)" style="color:#fff;background:#60bf4d">緑系</button>
+					<button class="uk-button uk-button-default" v-on:click="onColorChange(5)" style="color:#fff;background:#3a80c9">青系</button>
+					<button class="uk-button uk-button-default" v-on:click="onColorChange(6)" style="color:#fff;background:#c57fc7">紫系</button>
+				</p>
+			</div>
+		</div>
+		-->
+		
+		<div id="my-download" class="uk-flex-top" uk-modal>
+			<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-large uk-text-center gf-kosu">
+			<button class="uk-modal-close-default" type="button" uk-close></button>
+				発行完了！<br>
+				画像をダウンロードしてご利用ください<br>
+				<img src="./img/load.gif" id="result"　download="懺悔フリップ.png" />
+				<br>
+				<p class="uk-text-small">
+					不具合報告は<a href="https://twitter.com/benio02325740" target="_blank">いか@くコ:彡</a>までお願いします
+				</p>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-alpha.12/dist/html2canvas.min.js"></script>
+
+<script>
+new Vue({
+  el: '#app',
+  data:{
+	message:'お便り内容',
+	user:'ユーザー名',
+  },
+  methods: {
+	generate(){
+		html2canvas(document.querySelector("#target")).then(function(canvas){
+			let imgData = canvas.toDataURL()
+			document.getElementById('result').src = imgData
+		});
+	}
+  },
+});
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-146890188-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-146890188-1');
+</script>
+
+
+</body>
+</html>
