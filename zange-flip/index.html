@@ -40,7 +40,8 @@
 	}
 	
 	#app {
-		
+		width:100%;
+		min-height:100%;
 	}
 	
 	.browser-size {
@@ -54,15 +55,9 @@
 	}
 	
 	.stripe {
-		background-color: #fff;
-		/*
-		background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #ffcce8), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, #ffcce8), color-stop(0.75, #ffcce8), color-stop(0.75, transparent), to(transparent));
-		-webkit-background-size: 24px 24px;
-		*/
+		background-color:#ffcce8;
+		background-image:url(./img/stripe.png);
 		padding: 3px;
-		border-width:6px;
-		border-style:solid;
-		border-color: #ffcce8;
 		border-radius: 16px;
 		width: 1140px;
 		min-height:620px;
@@ -85,9 +80,9 @@
 <body>
 
 <div id="app" class="bk-color uk-flex uk-flex-center uk-flex-middle capture-size">
-<div id="target" class="bk-color uk-flex uk-flex-center uk-flex-middle capture-size">
 
-	<div class="stripe gf-noto font-size-28">
+<div id="target" class="bk-color uk-flex uk-flex-center uk-flex-middle capture-size">
+	<div class="stripe gf-noto font-size-28" :style="borderstyle">
 		<div class="stripe-inner">
 			<div style="padding:1em 0.5em;">
 				<p class="uk-text-left" style="white-space:pre-wrap; word-wrap:break-word;">
@@ -99,8 +94,6 @@
 			</div>
 		</div>
 	</div>
-	
-	
 </div>
 
 <div id="message-1" class="uk-flex-top modal-close-default" uk-modal>
@@ -141,25 +134,13 @@
 			</div>
 		</a>
 		
-		<!--
 		<div id="border-color" class="uk-flex-top modal-close-default" uk-modal>
 			<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical gf-kosu">
 				<button class="uk-modal-close-default" type="button" uk-close></button>
 				<h5 class="uk-modal-title">枠色を選択</h5>
-				<p class="uk-text-center">
-					<button class="uk-button uk-button-default" v-on:click="onColorChange(0)" style="color:#fff;background:#757575">デフォルト</button>
-					<button class="uk-button uk-button-default" v-on:click="onColorChange(1)" style="color:#fff;background:#c93838">赤系</button>
-					<button class="uk-button uk-button-default" v-on:click="onColorChange(2)" style="color:#fff;background:#ffb54d">オレンジ系</button>
-				</p>
-				<p class="uk-text-center">
-					<button class="uk-button uk-button-default" v-on:click="onColorChange(3)" style="color:#fff;background:#ebd028">黄色系</button>
-					<button class="uk-button uk-button-default" v-on:click="onColorChange(4)" style="color:#fff;background:#60bf4d">緑系</button>
-					<button class="uk-button uk-button-default" v-on:click="onColorChange(5)" style="color:#fff;background:#3a80c9">青系</button>
-					<button class="uk-button uk-button-default" v-on:click="onColorChange(6)" style="color:#fff;background:#c57fc7">紫系</button>
-				</p>
+				<input class="uk-input" type="text"　v-model="bordercolor" placeholder="カラーコードを入力">
 			</div>
 		</div>
-		-->
 		
 		<div id="my-download" class="uk-flex-top" uk-modal>
 			<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-large uk-text-center gf-kosu">
@@ -188,6 +169,10 @@ new Vue({
   data:{
 	message:'お便り内容',
 	user:'ユーザー名',
+	bordercolor:'#ffcce8',
+	borderstyle:{
+		'background-color':'#ffcce8',
+	},
   },
   methods: {
 	generate(){
